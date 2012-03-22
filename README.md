@@ -5,8 +5,8 @@ Sanitizer.js is a JavaScript Library designed to help sanitize your string input
 This project is open-source and open to be modified.
 
 ##Developed By
-####Chien-Hung Chen
-####Christopher Gross
-####Alexandre Sevrain
-####Davis Wilkinson
+- Chien-Hung Chen
+- Christopher Gross
+- Alexandre Sevrain
+- Davis Wilkinson
 
