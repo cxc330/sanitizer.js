@@ -16,5 +16,5 @@ To use this package please make sure to install mysql from npm.
     npm install mysql
 ###node.js
 To run this please use the command
-   node app.js
+    node app.js
 
