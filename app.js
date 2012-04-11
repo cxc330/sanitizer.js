@@ -18,7 +18,8 @@ function(err, result, fields) {
     else {
         for (var i in result) {
             var item = result[i];
-            console.log(item.text);
+            console.log('Query result ' + i + ': ' + item.text);
         }
     }
+    console.log('Query complete');
 });
