@@ -14,9 +14,11 @@ This project is open-source and open to be modified.
 ###mysql
 To use this package please make sure to install mysql from npm.
 
-<code>npm install mysql</code>
+    npm install mysql
+
+
 ###node.js
 To run this please use the command
 
-<code>node app.js</code>
+    node app.js
 
