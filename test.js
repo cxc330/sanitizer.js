@@ -2,4 +2,4 @@
 
 var sanitizer = require('./sanitizer.js');
 
-console.log("test");
+console.log(sanitizer.test);
