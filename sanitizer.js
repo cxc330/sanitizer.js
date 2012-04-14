@@ -4,5 +4,5 @@
 
 
 exports.test = function() {
-	console.log("testing inside sanitizer.js");
+	return "testing inside sanitizer.js";
 }
