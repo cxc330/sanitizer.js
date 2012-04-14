@@ -4,4 +4,6 @@
 var count = 0;
 
 
-exports.test = count++;
+exports.test = function(){
+	return (count++);
+};
