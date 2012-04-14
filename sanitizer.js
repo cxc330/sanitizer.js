@@ -2,3 +2,7 @@
 //The code is provided AS-IS and is free to distribute, edit, and reuse with mentions of the original developers
 
 
+
+exports.test = function() {
+	console.log("testing inside sanitizer.js");
+}

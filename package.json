@@ -9,7 +9,7 @@
 		"author4" : "Davis Wilkinson <dwilk@case.edu>"
 	},
   	"homepage"    : "https://github.com/cxc330/sanitizer.js",
-  	"main"        : "sanitizer",
+  	"main"        : "sanitizer,js",
   	"script"	  : {
 		"test"	  : "run test.js",
 	}
