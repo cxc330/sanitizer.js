@@ -3,4 +3,6 @@
 
 
 
-exports.test = "testing inside sanitizer.js";
+exports.test = function(){
+	return "testing inside sanitizer.js";
+}
