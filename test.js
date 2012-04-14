@@ -3,3 +3,7 @@
 var sanitizer = require('./sanitizer.js');
 
 console.log(sanitizer.test);
+console.log(sanitizer.test);
+console.log(sanitizer.test);
+console.log(sanitizer.test);
+console.log(sanitizer.test);
