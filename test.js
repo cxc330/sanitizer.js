@@ -2,8 +2,8 @@
 
 var sanitizer = require('./sanitizer.js');
 
-console.log(sanitizer.test("I"));
-console.log(sanitizer.test("AM"));
-console.log(sanitizer.test("A"));
-console.log(sanitizer.test("BAD"));
-console.log(sanitizer.test("STRING"));
+console.log(sanitizer.stripHTML("I"));
+console.log(sanitizer.stripHTML("AM"));
+console.log(sanitizer.stripHTML("A"));
+console.log(sanitizer.stripHTML("BAD"));
+console.log(sanitizer.stripHTML("STRING"));
