@@ -67,7 +67,7 @@ var scriptsInHTML = "<head>"+
 
 //Testing Email
 console.log("\n----------Testing Email----------\n");
-for(int i = 0; i < goodEmails.length; i++)
+for(var i = 0; i < goodEmails.length; i++)
 {
 	if(sanitizer.verifyEmail(goodEmails[i]))
 		console.log("Good: " + goodEmails[i]);
