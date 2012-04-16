@@ -2,6 +2,5 @@
 //The code is provided AS-IS and is free to distribute, edit, and reuse with mentions of the original developers
 
 exports.stripHTML = function(stringIn){
-	//return stringIn.replace(/<(?:.|\n)*?>/gm, '');
-	return stringIn;
+	return stringIn.replace(/<(?:.|\n)*?>/gm, '');
 };
