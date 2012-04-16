@@ -37,7 +37,7 @@ var plainHTML = "<body>"+
 //Testing HTML
 console.log("----------Testing HTML----------");
 console.log(sanitizer.stripHTML(plainHTML));
-console.log(sanitizer.stripHTML());
+console.log(sanitizer.stripHTML("IS"));
 console.log(sanitizer.stripHTML("A"));
 console.log(sanitizer.stripHTML("BAD"));
 console.log(sanitizer.stripHTML("STRING"));
