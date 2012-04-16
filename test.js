@@ -23,6 +23,16 @@ goodEmails.push( "\"()<>[]:;@,\\\\\"!#$%&'*+-/=?^_`{}|\ \ \ \ \ ~\ \ \ \ \ \ \ ?
 goodEmails.push( "\"\"@example.org");
 goodEmails.push( "postbox@com");
 
+var badEmails = [];
+badEmails.push("Abc.example.com");
+badEmails.push("Abc.@example.com");
+badEmails.push("Abc..123@example.com");
+badEmails.push("A@b@c@example.com");
+badEmails.push("a\"b(c)d,e:f;g<h>i[j\\k]l@example.com");
+badEmails.push("just\"not\"right@example.com");
+badEmails.push("this is\"not\\allowed@example.com");
+badEmails.push("this\\ still\\\"not\\\\allowed@example.com");
+
 //HTML
 var plainHTML = "<body>"+
 	"<div class=\"wrapper\">"+
@@ -66,13 +76,21 @@ var scriptsInHTML = "<head>"+
 ------------------------------------------------------------*/
 
 //Testing Email
-console.log("\n----------Testing Email----------\n");
+console.log("\n----------Testing Good Emails----------\n");
 for(var i = 0; i < goodEmails.length; i++)
 {
 	if(sanitizer.verifyEmail(goodEmails[i]))
 		console.log("Good: " + goodEmails[i]);
 	else
 		console.log("Bad: " + goodEmails[i]);
+}
+console.log("\n----------Testing Bad Emails----------\n");
+for(var i = 0; i < badEmails.length; i++)
+{
+	if(sanitizer.verifyEmail(badEmails[i]))
+		console.log("Good: " + badEmails[i]);
+	else
+		console.log("Bad: " + badEmails[i]);
 }
 
 //Testing HTML
