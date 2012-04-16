@@ -2,7 +2,7 @@
 
 var sanitizer = require('./sanitizer.js');
 
-console.log(sanitizer.stripHTML("I"));
+console.log(sanitizer.stripHTML("<div class=\"menu\"><ul><li><a href=\"/education/\"><span class=\"menuLong\">Education</span><span class=\"menuShort\">Edu</span></a></li></ul></div>"));
 console.log(sanitizer.stripHTML("AM"));
 console.log(sanitizer.stripHTML("A"));
 console.log(sanitizer.stripHTML("BAD"));
