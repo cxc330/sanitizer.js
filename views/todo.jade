@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h2 Results
+  - var data = results;
+  each item, i in results.query
+    - var record = item;
+    h3 Item #{i+1}
+    each value, key in record
+      li
+        p
+        #{key}: #{value}

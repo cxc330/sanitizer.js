@@ -12,9 +12,11 @@ This project is open-source and open to be modified.
 
 ##Usage
 ###mysql
-To use this package please make sure to install mysql from npm.
+To use this package please make sure to install mysql, jade and express from npm.
 
     npm install mysql
+	npm install express
+	npm install jade
 
 
 ###node.js
