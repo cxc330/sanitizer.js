@@ -55,7 +55,14 @@ app.get('/todo', function(req, res){
 		}
 		console.log('Query complete');
 		res.render('todo', {results: queryData });
+		/*
+		* JEFF the queryData variable is fine here... IT contains all data... however...
+		*/
 	});
+	/*
+	* once we are here it no longer contains the info within the query array... as evidenced by the following console.log
+	*/
+	console.log("I should have data :( " + queryData.query[0]);
 });
 
 app.post('/todoRequest', function(req, res){
