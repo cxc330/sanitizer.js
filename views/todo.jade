@@ -1,12 +1,19 @@
 extends layout
 
 block content
-  h2 Results
-  - var data = results;
-  each item, i in results.query
-    - var record = item;
-    h3 Item #{i+1}
-    each value, key in record
+  ul
+    - var data = results;
+    each item, i in results.query
+      - var record = item;
+      - var task = record.task;
       li
-        p
-        #{key}: #{value}
+        textarea(name = 'task' + i)
+          #{task}
+        | Complete:
+        - if (item.complete == 0)
+          input(type='checkbox', name='complete' + i)
+        - else
+          input(type='checkbox', checked, name='complete' + i)
+        | Due:
+        input(value = record.dueDate, class='due')
+        

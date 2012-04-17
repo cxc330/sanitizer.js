@@ -1,9 +1,20 @@
 !!! 5
 html
     head  
-    title My template
+    title To Do List
     link(rel='stylesheet', href='/todo/main.css') 
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js')
+    script(src='/todo/placeholder.js')
   body
-    h1 Content goes here
-    #container
+    h1 To Do List!
+    h3 Stuff left to do
+    form#todoForm(method='post', action='/todoRequest')
       block content
+      h3 Make a new todo!
+      div
+        input.due(type='text', name='due', value='0000-00-00')
+        textarea(name='task', cols='12', rows='2', placeholder='enter your task here')
+      input(type='submit', value='Update/Add', name='button')
+script
+  $('input[placeholder], textarea[placeholder]').placeholder();
+script(src='checkbox.js')

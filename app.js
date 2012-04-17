@@ -40,16 +40,22 @@ app.get('/todo', function(req, res){
 			for (var i in result) {
 				var item = result[i];
 				console.log('Query result ' + i + ': ' + item.task);
-				response.query.push({
+				response.query.push({					
+						'task'			: item.task,
 						'creationDate'	: item.creationDate, 
 						'dueDate'		: item.dueDate,
-						'task'			: item.task
+						'complete'		: item.complete
 				});				
 			}
 		}
 		console.log('Query complete');
 		res.render('todo', {results: response });
 	});
+});
+
+app.post('/todoRequest', function(req, res){
+ console.log(req.body);
+ res.send(req.body);	
 });
 
 //404 ROUTE
