@@ -1,10 +1,32 @@
 //Created By: Chien-Hung Chen, Christopher Gross, Davis Wilkinson, Alex Sevrain
 //The code is provided AS-IS and is free to distribute, edit, and reuse with mentions of the original developers
+//Used http://gskinner.com/RegExr/ to test regular expressions. Please verify for correctness.
 
+//Strips HTML
 exports.stripHTML = function(stringIn){
 	return stringIn.replace(/<(?:.|\n)*?>/gm, '');
 };
 
-exports.verifyEmail = function(stringIn){
-	return (stringIn.search(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0);
+//Verifies Email
+exports.verifyEmail = function(stringIn, granularity){
+	if(granularity == "LOW") //only allow basic letters numbers and symbols
+		return (stringIn.search(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0); //Done ...ish
+	else if(granularity == "MEDIUM") //also includes IPs in emails
+		return (stringIn.search(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0); //Need to implement still
+	else if(granularity == "HIGH") //checks against all characters
+		return (stringIn.search(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0); 
+		//return (stringIn.search(/\b[A-Za-z0-9"._%\\ /@;:,)(<>!#\$%&\^\?={}\|`~_\*'\+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0); //not done yet, also something weird is not allowing the regex to be escaped correctly.
+	else //default to LOW
+		return (stringIn.search(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0);
+};
+
+//Encoding for URL
+exports.encodeURL = function(stringIn){
+	return (encodeURIComponent(stringIn)); //This should be all we need
+}
+
+
+//Strips SQL
+exports.stripSQL() = function(stringIn){
+	return stringIn; //Alex and Davis please figure out how to stripSQL correctly
 };
