@@ -38,7 +38,8 @@ mySqlStart();
 //Default route
 app.get('/todo', function(req, res){
 	queryData = {query:[]};
-	mysql.query('select * from ' + TABLE,
+	
+	mysql.query('select * from ' + TABLE, //Select all query
 	function(err, result, fields) {
 		if (err) throw err;
 		else {
@@ -55,24 +56,17 @@ app.get('/todo', function(req, res){
 		}
 		console.log('Query complete');
 		res.render('todo', {results: queryData });
-		/*
-		* JEFF the queryData variable is fine here... IT contains all data... however...
-		*/
 	});
-	/*
-	* once we are here it no longer contains the info within the query array... as evidenced by the following console.log
-	*/
-	console.log("I should have data :( " + queryData.query[0]);
 });
 
 app.post('/todoRequest', function(req, res){
- processData(req.body);
- res.redirect('todo');	//redirect back to home page
+	processData(req.body);
+	res.redirect('todo');	//redirect back to home page
 });
 
 //404 ROUTE
 app.get('*', function(req, res){
-  res.render('404', 404);
+	res.render('404', 404);
 });
 
 function processData(data){
@@ -84,19 +78,17 @@ function processData(data){
 	if (newTask != '')
 	{
 		insertData(currentDate, "'" + newDue + "'", "'" + newTask+ "'", notComplete);
-	}
+	}	
 	
-	var x = 0;
 	for (var attribute in data) //check each data attribute
 	{
 		console.log(attribute + ": " + data[attribute]);
 		var propOne = data[attribute];
-		var propTwo = queryData;
+		var propTwo = queryData.query[0].dueDate;
 		if (propOne == propTwo)
 			console.log("No change");
 		else
 			console.log("change between " + propOne + " and " + propTwo);
-		x++;
 	}
 }
 
