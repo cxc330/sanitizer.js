@@ -5,7 +5,6 @@ var mysql;
 var mysqlConfig = require('./mysqlConfig');
 
 app.configure(function(){
-	app.use(express.logger());
 	app.use(express.static(__dirname + '/static'));
 });
 
@@ -29,11 +28,28 @@ function mySqlStart(){
 	mysql.query('use ' + DATABASE);
 }
 
-//mySqlStart();
+mySqlStart();
 
 //Default route
-app.get('/', function(req, res){
-	res.render('todo');
+app.get('/todo', function(req, res){
+	var response = {query:[]};
+	mysql.query('select * from ' + TABLE,
+	function(err, result, fields) {
+		if (err) throw err;
+		else {
+			for (var i in result) {
+				var item = result[i];
+				console.log('Query result ' + i + ': ' + item.task);
+				response.query.push({
+						'creationDate'	: item.creationDate, 
+						'dueDate'		: item.dueDate,
+						'task'			: item.task
+				});				
+			}
+		}
+		console.log('Query complete');
+		res.render('todo', {results: response });
+	});
 });
 
 //404 ROUTE
