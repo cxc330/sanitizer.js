@@ -1,14 +1,14 @@
 #Santizer.js
 
-Sanitizer.js is a JavaScript Library designed to help sanitize your string inputs. Currently being developed for a Computer Security class. The idea is this JavaScript Library will be useful to do some client-side sanitization (not 100% secure because it IS on client side), and will definitely be useful for Node.js development.
+- Description
+	- Sanitizer.js is a JavaScript Library designed to help sanitize your string inputs. Currently being developed for a Computer Security class. The idea is this JavaScript Library will be useful to do some client-side sanitization (not 100% secure because it IS on client side), and will definitely be useful for Node.js development.
+	- This project is open-source and open to be modified.
 
-This project is open-source and open to be modified.
-
-##Developed By
-- Chien-Hung Chen
-- Christopher Gross
-- Alexandre Sevrain
-- Davis Wilkinson
+- Developers
+	- Chien-Hung Chen
+	- Christopher Gross
+	- Alexandre Sevrain
+	- Davis Wilkinson
 
 ##Description of Files
 Important files you need to understand are:
@@ -41,7 +41,7 @@ To run this please use the command
 Where the 3000 can be any open port you want.
 
 ####Seeing and using the To-Do List
-To use the To-Do List web application, go to http://yourservername.com:portnumber/todo/
+To use the To-Do List web application, go to http://yourserver.url:portnumber/todo/
 
 ###Using Test.js
 ####Description
