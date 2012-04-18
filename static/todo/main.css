@@ -10,6 +10,9 @@ html{
 	height:100%;
 	width:100%;
 }
+a{
+	color:#c82829;
+}
 
 body {
 	background:#DFDFDF;
