@@ -179,7 +179,7 @@ function insertData (createDate, dueDate, task, complete){
 	mysql.query(query,
 		function(err, result, fields) {
 			if (err) 
-				throw err;
+				console.log(err);
     		else 
 				console.log('Inserted into DB using the following statement:\n\t "' + query + '"');
 		});
@@ -195,7 +195,7 @@ function updateData(createDate, dueDate, task, complete, set)
 	mysql.query(query,
 		function(err, result, fields) {
 			if (err) 
-				throw err;
+				console.log(err);
     		else 
 				console.log('Updated DB using the following statement:\n\t "' + query + '"');
 		});
@@ -211,7 +211,7 @@ function deleteData (createDate, dueDate, task, complete)
 	mysql.query(query,
 		function(err, result, fields) {
 			if (err) 
-				throw err;
+				console.log(err);
     		else 
 				console.log('Deleted from DB using the following statement:\n\t "' + query + '"');
 		});
