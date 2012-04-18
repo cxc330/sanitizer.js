@@ -217,9 +217,10 @@ function deleteData (createDate, dueDate, task, complete)
 		});
 }
 
-if(process.argv[0] != null || process.argv[0] != undefined)
+if(process.argv[2] != null || process.argv[2] != undefined)
 {
-	app.listen(process.argv[0]);
+	console.log(process.argv[2]);
+	app.listen(process.argv[2]);
 }
 else
 {
