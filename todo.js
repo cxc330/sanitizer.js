@@ -200,7 +200,7 @@ function deleteData (createDate, dueDate, task, complete)
 
 if(process.argv[0] != null || process.argv[0] != undefined)
 {
-	app.listen(argv[0]);
+	app.listen(process.argv[0]);
 }
 else
 {
