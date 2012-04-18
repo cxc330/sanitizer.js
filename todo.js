@@ -71,7 +71,6 @@ app.get('*', function(req, res){
 });
 
 function processData(data){
-	console.log(data);
 	
 	var newDue = $.trim(data.newDue);
 	var newTask = $.trim(data.newTask);
@@ -94,14 +93,15 @@ function processData(data){
 				var propOne = $.trim(data[attribute][result]);
 				var propTwo;
 				
-				console.log(attribute + ": " + propOne);
-				
 				switch(attribute)
 				{
 					case 'task':
 					{
-						propTwo = queryData.query[x].task;
-						break;
+						if (queryData.query[x] != undefined)
+						{
+							propTwo = queryData.query[x].task;
+							break;
+						}
 					}
 					case 'dueDate':
 					{
@@ -151,7 +151,6 @@ function processData(data){
 		
 		if (propOne != propTwo && (propTwo != 0 || propOne != undefined))
 		{
-			console.log("updating");
 			var checkNum;
 			if (propTwo == 0)
 			{
