@@ -49,7 +49,7 @@ h1{
 	font-size:2em;
 	padding:5px;
 	text-align:left;
-	border-bottom:1px solid #FFF;
+	border-bottom:1px solid #666;
 }
 
 h3{
@@ -58,19 +58,20 @@ h3{
 	text-shadow: 0px 1px 3px #AAA;
 	-moz-text-shadow: 0px 1px 3px #AAA;
 	font-size:1.8em;
+	border-top: 1px solid #FFF;
+	border-bottom:1px solid #BBB;
 }
 
 ul{
 	background:#EEE;
 	display:block;
-	border: 1px solid #CCC;
-	border-bottom:0px;
 	vertical-align:text-top;
 }
 
 li , div{
 	color:#666;
 	border-bottom:1px solid #BBB;
+	border-top:1px solid #FFF;
 	padding:10px;
 	display:block;
 	vertical-align:text-top;
@@ -161,10 +162,16 @@ input[type='submit']
 	);
 	border: 1px solid #333;
 	padding:5px;
-	font-size:.9em;
+	font-size:1.3em;
+	width:100%;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	margin-left:0px;
+	margin-right:0px;
 	border-radius: 3px;
 	-moz-border-radius: 3px;
 	border-color:#EEE;
+	font-weight:bold;
 	color:#EEE;
 }
 
@@ -185,8 +192,4 @@ input[type='submit']:hover{
 		color-stop(0.24, #333333),
 		color-stop(0.75, #434343)
 	);
-}
-
-div {
-	border-top: 1px solid #CCC;
 }
