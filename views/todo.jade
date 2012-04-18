@@ -11,9 +11,9 @@ block content
           #{task}
         | Complete:
         - if (item.complete == 0)
-          input(type='checkbox', name='complete')
+          input(type='checkbox', name='complete' + i)
         - else
-          input(type='checkbox', checked, name='complete')
+          input(type='checkbox', checked, name='complete' + i)
         | Due:
         input(value = record.dueDate, class='due', name='dueDate')
         input(name ='delete' + i, type='checkbox', value='0',  class='styled')        

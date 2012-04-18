@@ -77,6 +77,7 @@ function processData(data){
 	var newTask = $.trim(data.newTask);
 	var set = [];
 	var del = [];
+	var check = [];
 	
 	if (newTask != '')
 	{
@@ -107,11 +108,6 @@ function processData(data){
 						propTwo = queryData.query[x].dueDate;
 						break;
 					}
-					case 'complete':
-					{
-						propTwo = queryData.query[x].complete;
-						break;
-					}
 					default:
 					{
 						if (attribute.indexOf("delete") > -1)
@@ -120,17 +116,19 @@ function processData(data){
 							del[x] = text;
 							break;
 						}
+						if (attribute.indexOf("complete") > -1)
+						{
+							var text = attribute.replace("complete", "");
+							check[text] = 1;
+							break;
+						}
 					}
 				}
 				
 				if (propOne == propTwo)
 					console.log("No change");
-				else if( attribute.indexOf("delete") == -1)
-				{
-					console.log("change between " + propOne + " and " + propTwo);
-					if (attribute == 'complete')
-						propOne = 1;
-					
+				else if( attribute.indexOf("delete") == -1 && attribute.indexOf("complete") == -1)
+				{				
 					if (set[x] != null)
 						set[x] += ", " + attribute + " = '" + propOne + "'";
 					else
@@ -145,6 +143,27 @@ function processData(data){
 	{
 		var y = del[x];
 		deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, queryData.query[y].task, queryData.query[y].complete);
+	}
+	for (var x = 0; x < queryData.query.length; x++)
+	{
+		propOne = check[x];
+		propTwo = queryData.query[x].complete;
+		
+		if (propOne != propTwo && (propTwo != 0 || propOne != undefined))
+		{
+			console.log("updating");
+			var checkNum;
+			if (propTwo == 0)
+			{
+				checkNum = 1;
+			}
+			else
+			{
+				checkNum = 0;
+			}
+			
+			updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, queryData.query[x].task, queryData.query[x].complete, "complete = '" + checkNum + "'");
+		}
 	}
 	for (var x in set)
 	{
