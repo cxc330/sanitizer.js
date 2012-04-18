@@ -3,8 +3,11 @@
 //Used http://gskinner.com/RegExr/ to test regular expressions. Please verify for correctness.
 
 //Strips HTML
-exports.stripHTML = function(stringIn){
-	return stringIn.replace(/<(?:.|\n)*?>/gm, '');
+exports.stripHTML = function(stringIn, granularity){
+	if(granularity == "LOW")
+		return stringIn.replace(/<(?:.|\n)*?>/gm, ''); //Strips everything in <> (inclusive)
+	else //NEEDS TO BE FILLED IN
+		return stringIn.replace(/<(?:.|\n)*?>/gm, ''); //Strips Javascript inside of <script> tags and CSS inside of <style> tags as well.
 };
 
 //Verifies Email
