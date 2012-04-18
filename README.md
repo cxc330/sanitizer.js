@@ -17,6 +17,7 @@ To use this package please make sure to install mysql, jade and express from npm
     npm install mysql
 	npm install express
 	npm install jade
+	npm install jquery
 
 
 ###node.js
