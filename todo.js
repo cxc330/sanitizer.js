@@ -1,13 +1,14 @@
-var _mysql = require('mysql');
 var express = require('express');
 app = express.createServer();
-var mysql;
 var mysqlConfig = require('./mysqlConfig');
+var mysql;
 var queryData;
-var currentDate = "CURDATE()";
 var notComplete = 0;
 var $ = require('jquery');
 
+/*
+*EXPRESS SETTINGS
+*/
 app.configure(function(){
 	app.use(express.static(__dirname + '/static')); //static file serving
 	app.use(express.bodyParser()); //post data parsing
@@ -16,32 +17,20 @@ app.configure(function(){
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.set('view options', {layout: false});
+/*
+*EXPRESS SETTINGS END
+*/
 
-var fs = require("fs");
-
-var MYSQL_USER = 'root';
-var MYSQL_PASS = 'password';
-var DATABASE = 'todo';
-var TABLE = 'toDoList';
-
-function mySqlStart(){
-	mysql = _mysql.createClient({
-		user: MYSQL_USER,
-		password: MYSQL_PASS,
-	});
-	
-	mysql.query('use ' + DATABASE);
-}
-
-mySqlStart();
+mysql = mysqlConfig.mySqlStart();
 
 //Default route
 app.get('/todo', function(req, res){
 	queryData = {query:[]};
 	
-	mysql.query("SELECT DATE_FORMAT(creationDate,'%Y-%m-%d'), DATE_FORMAT(dueDate,'%Y-%m-%d'), task, complete FROM " + TABLE, //Select all query
+	mysql.query("SELECT DATE_FORMAT(creationDate,'%Y-%m-%d'), DATE_FORMAT(dueDate,'%Y-%m-%d'), task, complete FROM " + mysqlConfig.TABLE, //Select all query
 	function(err, result, fields) {
-		if (err) throw err;
+		if (err) 
+			console.log(err);
 		else {
 			for (var i in result) {
 				var item = result[i];
@@ -81,7 +70,7 @@ function processData(data){
 	
 	if (newTask != '')
 	{
-		insertData(currentDate, "'" + newDue + "'", "'" + escape(newTask) + "'", notComplete);
+		mysqlConfig.insertData(mysqlConfig.currentDate, "'" + newDue + "'", "'" + escape(newTask) + "'", notComplete);
 	}	
 	
 	for (var attribute in data) //check each data attribute
@@ -193,7 +182,7 @@ function processData(data){
 	for (var x in del)
 	{
 		var y = del[x];
-		deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, escape(queryData.query[y].task), queryData.query[y].complete);
+		mysqlConfig.deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, escape(queryData.query[y].task), queryData.query[y].complete);
 	}
 	for (var x = 0; x < queryData.query.length; x++)
 	{
@@ -212,67 +201,20 @@ function processData(data){
 				checkNum = 0;
 			}
 			
-			updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, "complete = '" + checkNum + "'");
+			mysqlConfig.updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, "complete = '" + checkNum + "'");
 		}
 	}
 	for (var x in set)
 	{
-		var dataEl = 
-		updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, set[x]);
+		mysqlConfig.updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, set[x]);
 	}
-}
-
-function insertData (createDate, dueDate, task, complete){
-	
-	var query = "INSERT INTO " + TABLE + " (creationDate, dueDate, task, complete)";
-	query += " VALUES (" + createDate + ", " + dueDate + ", " + task + ", " + complete +")";
-	
-	mysql.query(query,
-		function(err, result, fields) {
-			if (err) 
-				console.log(err);
-    		else 
-				console.log('Inserted into DB using the following statement:\n\t "' + query + '"');
-		});
-}
-
-function updateData(createDate, dueDate, task, complete, set)
-{
-	var query = "UPDATE " + TABLE + " SET " + set + " WHERE task = '" + task + "'";
-	query += " AND creationDate = '" + createDate + "'";
-	query += " AND dueDate = '" + dueDate + "'";
-	query += " AND complete = '" + complete +"'";
-	
-	mysql.query(query,
-		function(err, result, fields) {
-			if (err) 
-				console.log(err);
-    		else 
-				console.log('Updated DB using the following statement:\n\t "' + query + '"');
-		});
-}
-	
-function deleteData (createDate, dueDate, task, complete)
-{
-	var query = "DELETE FROM " + TABLE + " WHERE task = '" + task + "'";
-	query += " AND creationDate = '" + createDate + "'";
-	query += " AND dueDate = '" + dueDate + "'";
-	query += " AND complete = '" + complete +"'";
-	
-	mysql.query(query,
-		function(err, result, fields) {
-			if (err) 
-				console.log(err);
-    		else 
-				console.log('Deleted from DB using the following statement:\n\t "' + query + '"');
-		});
 }
 
 function isArray(obj){
 	return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
-if(process.argv[2] != null || process.argv[2] != undefined)
+if (process.argv[2] != null || process.argv[2] != undefined)
 {
 	console.log(process.argv[2]);
 	app.listen(process.argv[2]);
