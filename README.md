@@ -53,4 +53,4 @@ To run test.js, simply:
 	node test.js
 
 
-##Sanitizer.js Breakdown
+##Sanitizer.js Manual
