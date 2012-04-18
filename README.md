@@ -14,17 +14,13 @@ This project is open-source and open to be modified.
 Important files you need to understand are:
 
 - sanitizer.js
-- todo.js
-- test.js
-
-- sanitizer.js
-	This file holds all of the functions for our sanitizer library.
+	- This file holds all of the functions for our sanitizer library.
 
 - todo.js
-	This file is the main application file for the sample application we've attached, a To-Do List web application.
+	- This file is the main application file for the sample application we've attached, a To-Do List web application.
 
 - test.js
-	This file is the application file for a basic test program to test the sanitizer library.
+	- This file is the application file for a basic test program to test the sanitizer library.
 	
 ##How To Run
 ###Sample Application - To-Do List
