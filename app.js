@@ -112,16 +112,20 @@ function processData(data){
 						propTwo = queryData.query[x].complete;
 						break;
 					}
-					case 'delete':
+					default:
 					{
-						del[x] = 'true';
-						break;
+						if (attribute.indexOf("delete") > -1)
+						{
+							var text = attribute.replace("delete", "");
+							del[x] = text;
+							break;
+						}
 					}
 				}
 				
 				if (propOne == propTwo)
 					console.log("No change");
-				else if( attribute != 'delete')
+				else if( attribute.indexOf("delete") == -1)
 				{
 					console.log("change between " + propOne + " and " + propTwo);
 					if (attribute == 'complete')
@@ -139,7 +143,8 @@ function processData(data){
 	
 	for (var x in del)
 	{
-		deleteData(queryData.query[x].creationDate, queryData.query[x].dueDate, queryData.query[x].task, queryData.query[x].complete);
+		var y = del[x];
+		deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, queryData.query[y].task, queryData.query[y].complete);
 	}
 	for (var x in set)
 	{
@@ -168,7 +173,6 @@ function updateData(createDate, dueDate, task, complete, set)
 	query += " AND dueDate = '" + dueDate + "'";
 	query += " AND complete = '" + complete +"'";
 	
-	console.log(query);
 	mysql.query(query,
 		function(err, result, fields) {
 			if (err) 
