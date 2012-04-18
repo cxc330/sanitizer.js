@@ -7,13 +7,13 @@ block content
       - var record = item;
       - var task = record.task;
       li
-        textarea(name = 'task' + i)
+        textarea(name = 'task')
           #{task}
         | Complete:
         - if (item.complete == 0)
-          input(type='checkbox', name='complete' + i)
+          input(type='checkbox', name='complete')
         - else
-          input(type='checkbox', checked, name='complete' + i)
+          input(type='checkbox', checked, name='complete')
         | Due:
-        input(value = record.dueDate, class='due', name='due' + i)
-        input(name ='delete' + i, type='checkbox', value='0',  class='styled')        
+        input(value = record.dueDate, class='due', name='dueDate')
+        input(name ='delete', type='checkbox', value='0',  class='styled')        
