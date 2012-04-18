@@ -47,10 +47,10 @@ app.get('/todo', function(req, res){
 				var item = result[i];
 				console.log('Query result ' + i + ': ' + item.task);
 				queryData.query.push({					
-						'task'			: item.task,
+						'task'			: unescape(item.task),
 						'creationDate'	: item["DATE_FORMAT(creationDate,'%Y-%m-%d')"], 
 						'dueDate'		: item["DATE_FORMAT(dueDate,'%Y-%m-%d')"],
-						'complete'		: item.complete
+						'complete'		: unescape(item.complete)
 				});				
 			}
 		}
@@ -81,69 +81,119 @@ function processData(data){
 	
 	if (newTask != '')
 	{
-		insertData(currentDate, "'" + newDue + "'", "'" + newTask+ "'", notComplete);
+		insertData(currentDate, "'" + newDue + "'", "'" + escape(newTask) + "'", notComplete);
 	}	
 	
 	for (var attribute in data) //check each data attribute
 	{
 		var x = 0;
-		for (var result in data[attribute])
+		if (isArray(data[attribute]))
 		{
-			if (attribute != 'button' && attribute != 'newDue' && attribute != 'newTask')
-			{				
-				var propOne = $.trim(data[attribute][result]);
-				var propTwo;
-				
-				switch(attribute)
-				{
-					case 'task':
-					{
-						if (queryData.query[x] != undefined)
-						{
-							propTwo = queryData.query[x].task;
-							break;
-						}
-					}
-					case 'dueDate':
-					{
-						propTwo = queryData.query[x].dueDate;
-						break;
-					}
-					default:
-					{
-						if (attribute.indexOf("delete") > -1)
-						{
-							var text = attribute.replace("delete", "");
-							del[x] = text;
-							break;
-						}
-						if (attribute.indexOf("complete") > -1)
-						{
-							var text = attribute.replace("complete", "");
-							check[text] = 1;
-							break;
-						}
-					}
-				}
-				
-				if (propOne == propTwo)
-					console.log("No change");
-				else if( attribute.indexOf("delete") == -1 && attribute.indexOf("complete") == -1)
+			for (var result in data[attribute])
+			{
+				if (attribute != 'button' && attribute != 'newDue' && attribute != 'newTask')
 				{				
-					if (set[x] != null)
-						set[x] += ", " + attribute + " = '" + propOne + "'";
-					else
-						set[x] = attribute + "= '" + propOne + "'";
+					var propOne = $.trim(data[attribute][result]);
+					var propTwo;
+					switch(attribute)
+					{
+						case 'task':
+						{
+							if (queryData.query[x] != undefined)
+							{
+								propTwo = queryData.query[x].task;
+								break;
+							}
+						}
+						case 'dueDate':
+						{
+							propTwo = queryData.query[x].dueDate;
+							break;
+						}
+						default:
+						{
+							if (attribute.indexOf("delete") > -1)
+							{
+								var text = attribute.replace("delete", "");
+								del[x] = text;
+								break;
+							}
+							if (attribute.indexOf("complete") > -1)
+							{
+								var text = attribute.replace("complete", "");
+								check[text] = 1;
+								break;
+							}
+						}
+					}
+					
+					propOne = escape(propOne);
+					propTwo = escape(propTwo);
+					if (propOne == propTwo)
+						console.log("No change");
+					else if( attribute.indexOf("delete") == -1 && attribute.indexOf("complete") == -1)
+					{				
+						if (set[x] != null)
+							set[x] += ", " + attribute + " = '" + propOne + "'";
+						else
+							set[x] = attribute + "= '" + propOne + "'";
+					}
 				}
+				x++;
 			}
-			x++;
+		}
+		else if (attribute != 'button' && attribute != 'newDue' && attribute != 'newTask')
+		{
+		  var propOne = $.trim(data[attribute]);
+		  var propTwo;
+		  switch(attribute)
+		  {
+			  case 'task':
+			  {
+					  propTwo = queryData.query[0].task;
+					  break;
+			  }
+			  case 'dueDate':
+			  {
+				  propTwo = queryData.query[0].dueDate;
+				  break;
+			  }
+			  default:
+			  {
+				  if (attribute.indexOf("delete") > -1)
+				  {
+					  var text = attribute.replace("delete", "");
+					  del[0] = text;
+					  break;
+				  }
+				  if (attribute.indexOf("complete") > -1)
+				  {
+					  var text = attribute.replace("complete", "");
+					  check[text] = 1;
+					  break;
+				  }
+			  }
+			}
+			
+			propOne = escape(propOne);
+			propTwo = escape(propTwo);
+			
+			if (propOne == propTwo)
+				console.log("No change");
+			else if( attribute.indexOf("delete") == -1 && attribute.indexOf("complete") == -1)
+			{				
+				if (set[0] != null)
+					set[0] += ", " + attribute + " = '" + propOne + "'";
+				else
+					set[0] = attribute + "= '" + propOne + "'";
+			}
 		}
 	}
 	
 	for (var x in del)
 	{
 		var y = del[x];
-		deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, queryData.query[y].task, queryData.query[y].complete);
+		deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, escape(queryData.query[y].task), queryData.query[y].complete);
 	}
 	for (var x = 0; x < queryData.query.length; x++)
 	{
@@ -162,12 +212,13 @@ function processData(data){
 				checkNum = 0;
 			}
 			
-			updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, queryData.query[x].task, queryData.query[x].complete, "complete = '" + checkNum + "'");
+			updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, "complete = '" + checkNum + "'");
 		}
 	}
 	for (var x in set)
 	{
-		updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, queryData.query[x].task, queryData.query[x].complete, set[x]);
+		var dataEl = 
+		updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, set[x]);
 	}
 }
 
@@ -215,6 +266,10 @@ function deleteData (createDate, dueDate, task, complete)
     		else 
 				console.log('Deleted from DB using the following statement:\n\t "' + query + '"');
 		});
+}
+
+function isArray(obj){
+	return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
 if(process.argv[2] != null || process.argv[2] != undefined)
