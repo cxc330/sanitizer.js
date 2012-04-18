@@ -61,7 +61,8 @@ app.get('/todo', function(req, res){
 
 //request route
 app.post('/todoRequest', function(req, res){
-	processData(req.body);
+	if (queryData != undefined)
+		processData(req.body);
 	res.redirect('todo');	//redirect back to home page
 });
 
