@@ -1,5 +1,5 @@
 var express = require('express');
-app = express.createServer();
+var app = express.createServer();
 var mysqlConfig = require('./mysqlConfig');
 var sanitizer = require('./sanitizer');
 var mysql;
