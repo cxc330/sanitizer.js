@@ -1,6 +1,7 @@
 var express = require('express');
 app = express.createServer();
 var mysqlConfig = require('./mysqlConfig');
+var sanitizer = require('./sanitizer');
 var mysql;
 var queryData;
 var notComplete = 0;
@@ -36,10 +37,10 @@ app.get('/todo', function(req, res){
 				var item = result[i];
 				console.log('Query result ' + i + ': ' + item.task);
 				queryData.query.push({					
-						'task'			: unescape(item.task),
+						'task'			: sanitizer.encodeUnescape(item.task),
 						'creationDate'	: item["DATE_FORMAT(creationDate,'%Y-%m-%d')"], 
 						'dueDate'		: item["DATE_FORMAT(dueDate,'%Y-%m-%d')"],
-						'complete'		: unescape(item.complete)
+						'complete'		: sanitizer.encodeUnescape(item.complete)
 				});				
 			}
 		}
@@ -70,7 +71,7 @@ function processData(data){
 	
 	if (newTask != '')
 	{
-		mysqlConfig.insertData(mysqlConfig.currentDate, "'" + newDue + "'", "'" + escape(newTask) + "'", notComplete);
+		mysqlConfig.insertData(mysqlConfig.currentDate, "'" + newDue + "'", "'" + sanitizer.encodeEscape(newTask) + "'", notComplete);
 	}	
 	
 	for (var attribute in data) //check each data attribute
@@ -116,8 +117,9 @@ function processData(data){
 						}
 					}
 					
-					propOne = escape(propOne);
-					propTwo = escape(propTwo);
+					propOne = sanitizer.encodeEscape(propOne);
+					propTwo = sanitizer.encodeEscape(propTwo);
+					
 					if (propOne == propTwo)
 						console.log("No change");
 					else if( attribute.indexOf("delete") == -1 && attribute.indexOf("complete") == -1)
@@ -164,8 +166,8 @@ function processData(data){
 			  }
 			}
 			
-			propOne = escape(propOne);
-			propTwo = escape(propTwo);
+			propOne = sanitizer.encodeEscape(propOne);
+			propTwo = sanitizer.encodeEscape(propTwo);
 			
 			if (propOne == propTwo)
 				console.log("No change");
@@ -182,7 +184,7 @@ function processData(data){
 	for (var x in del)
 	{
 		var y = del[x];
-		mysqlConfig.deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, escape(queryData.query[y].task), queryData.query[y].complete);
+		mysqlConfig.deleteData(queryData.query[y].creationDate, queryData.query[y].dueDate, sanitizer.encodeEscape(queryData.query[y].task), queryData.query[y].complete);
 	}
 	for (var x = 0; x < queryData.query.length; x++)
 	{
@@ -201,12 +203,12 @@ function processData(data){
 				checkNum = 0;
 			}
 			
-			mysqlConfig.updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, "complete = '" + checkNum + "'");
+			mysqlConfig.updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, sanitizer.encodeEscape(queryData.query[x].task), queryData.query[x].complete, "complete = '" + checkNum + "'");
 		}
 	}
 	for (var x in set)
 	{
-		mysqlConfig.updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, escape(queryData.query[x].task), queryData.query[x].complete, set[x]);
+		mysqlConfig.updateData(queryData.query[x].creationDate, queryData.query[x].dueDate, sanitizer.encodeEscape(queryData.query[x].task), queryData.query[x].complete, set[x]);
 	}
 }
 
