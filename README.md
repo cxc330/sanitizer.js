@@ -27,12 +27,11 @@ Important files you need to understand are:
 ####Dependencies and Packages
 To use this package please make sure to install mysql, jade and express from npm.
 
-        npm install mysql
-	npm install express
-	npm install jade
-	npm install jquery
-        npm install colors
-
+    npm install mysql
+    npm install express
+    npm install jade
+    npm install jquery
+    npm install colors
 
 ####Running the To-Do List
 To run this please use the command
