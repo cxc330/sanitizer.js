@@ -223,12 +223,5 @@ if (process.argv[2] != null || process.argv[2] != undefined)
 }
 else
 {
-	try
-	{
-		app.listen(3000);
-	}
-	catch(e)
-	{
-		console.log("Port is in use.");
-	}
+	app.listen(3000);
 }
