@@ -229,6 +229,6 @@ else
 	}
 	catch(err)
 	{
-		console.log("Chris Gross likes dicks");
+		console.log("Port is in use.");
 	}
 }
