@@ -1,7 +1,8 @@
 var _mysql = require('mysql');
+var login = require('./login');
 var mysql;
-exports.MYSQL_USER = 'root';
-exports.MYSQL_PASS = 'password';
+exports.MYSQL_USER = login.user;
+exports.MYSQL_PASS = login.pw;
 exports.DATABASE = 'todo';
 exports.TABLE = 'toDoList';
 exports.currentDate = "CURDATE()";

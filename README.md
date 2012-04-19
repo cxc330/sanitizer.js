@@ -27,7 +27,7 @@ Important files you need to understand are:
 ####Dependencies and Packages
 To use this package please make sure to install mysql, jade and express from npm.
 
-    npm install mysql
+      npm install mysql
 	npm install express
 	npm install jade
 	npm install jquery
@@ -42,6 +42,15 @@ Where the 3000 can be any open port you want.
 
 ####Seeing and using the To-Do List
 To use the To-Do List web application, go to http://yourserver.url:portnumber/todo/
+Please also create a file called
+
+       login.js
+
+with fields
+
+       exports.pw = "mypassword";
+       exports.user = "myusername";
+
 
 ###Using Test.js
 ####Description
