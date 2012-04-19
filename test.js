@@ -73,6 +73,11 @@ var scriptsInHTML = "<head>"+
         "<link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/css/style.css\" />	<title>Home - Chien-Hung Chen</title>\n"+
 "</head>\n";
 
+//Strings with Special Characters to Encode and Decode
+var stringWithSpecialCharacters = "Hello World! Hello EECS444 $#%";
+//URL Encode and Decode
+var url = "http://w3schools.com/my test.asp?name=ståle&car=saab";
+
 /*Calling sanitizer.js to test
 ------------------------------------------------------------*/
 
@@ -96,6 +101,19 @@ for(var i = 0; i < badEmails.length; i++)
 
 //Testing HTML
 console.log("\n----------Testing HTML----------\n".magenta);
-console.log(sanitizer.stripHTML(plainHTML));
+console.log("Before: " + plainHTML + "\n");
+console.log("After: " + sanitizer.stripHTML(plainHTML) + "\n");
 console.log("\n----------Testing HTML & SCRIPT Tags----------\n".rainbow);
-console.log(sanitizer.stripHTML(scriptsInHTML));
+console.log("Before: " + scriptsInHTML + "\n");
+console.log("After: " + sanitizer.stripHTML(scriptsInHTML) + "\n");
+
+
+//Testing Encode and Decode
+console.log("\n----------Testing Encode and Decode----------\n".magenta);
+console.log("Before: " + stringWithSpecialCharacters + "\n");
+console.log("After Encode: " + encode(stringWithSpecialCharacters) + "\n");
+console.log("After Decode: " + decode(stringWithSpecialCharacters) + "\n");
+console.log("\n----------Testing Encode and Decode URL----------\n".magenta);
+console.log("Before: " + url + "\n");
+console.log("After Encode: " + encode(url, "URL") + "\n");
+console.log("After Decode: " + decode(url, "URL") + "\n");
