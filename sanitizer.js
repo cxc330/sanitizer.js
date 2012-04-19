@@ -23,6 +23,16 @@ exports.verifyEmail = function(stringIn, granularity){
 		return (stringIn.search(/\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b/g) == 0);
 };
 
+//Encode Escape
+exports.encodeEscape = function(stringIn){
+	return (escape(stringIn)); //This should be all we need
+}
+
+//Encode Unescape
+exports.encodeUnescape = function(stringIn){
+	return (unescape(stringIn)); //This should be all we need
+}
+
 //Encoding for URL
 exports.encodeURL = function(stringIn){
 	return (encodeURIComponent(stringIn)); //This should be all we need
