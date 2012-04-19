@@ -111,9 +111,9 @@ console.log("After: " + sanitizer.stripHTML(scriptsInHTML) + "\n");
 //Testing Encode and Decode
 console.log("\n----------Testing Encode and Decode----------\n".magenta);
 console.log("Before: " + stringWithSpecialCharacters + "\n");
-console.log("After Encode: " + encode(stringWithSpecialCharacters) + "\n");
-console.log("After Decode: " + decode(stringWithSpecialCharacters) + "\n");
+console.log("After Encode: " + sanitizer.encode(stringWithSpecialCharacters) + "\n");
+console.log("After Decode: " + sanitizer.decode(stringWithSpecialCharacters) + "\n");
 console.log("\n----------Testing Encode and Decode URL----------\n".magenta);
 console.log("Before: " + url + "\n");
-console.log("After Encode: " + encode(url, "URL") + "\n");
-console.log("After Decode: " + decode(url, "URL") + "\n");
+console.log("After Encode: " + sanitizer.encode(url, "URL") + "\n");
+console.log("After Decode: " + sanitizer.decode(url, "URL") + "\n");
