@@ -229,6 +229,6 @@ else
 	}
 	catch(err)
 	{
-		console.log(err.message);
+		console.log("Chris Gross likes dicks")
 	}
 }
