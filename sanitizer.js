@@ -57,5 +57,7 @@ exports.decode = function(stringIn, type){
 
 //Strips SQL
 exports.stripSQL = function(stringIn){
-	return stringIn; //Alex and Davis please figure out how to stripSQL correctly
+	stringIn = stringIn.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, ''); //removes "bad" SQL characters 
+	return stringIn = stringIn.replace(/[\%27][\'][\-\-][\%23]#)/g,''); //detection of SQL meta-characters
+ 
 };
