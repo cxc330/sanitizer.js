@@ -223,5 +223,12 @@ if (process.argv[2] != null || process.argv[2] != undefined)
 }
 else
 {
-	app.listen(3000);
+	try
+	{
+		app.listen(3000);
+	}
+	catch(err)
+	{
+		console.log(err.message);
+	}
 }
