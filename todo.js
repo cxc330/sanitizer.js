@@ -227,7 +227,7 @@ else
 	{
 		app.listen(3000);
 	}
-	catch(err)
+	catch(e)
 	{
 		console.log("Port is in use.");
 	}
