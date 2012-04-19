@@ -42,6 +42,6 @@ exports.encodeURL = function(stringIn){
 //Strips SQL
 exports.stripSQL = function(stringIn){
 	stringIn = stringIn.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, ''); //removes "bad" SQL characters 
-	return stringIn = stringIn.replace(/[\%27][\'][\-\-][\%23]#)/g,”); //detection of SQL meta-characters
+	return stringIn = stringIn.replace(/[\%27][\'][\-\-][\%23]#)/g,''); //detection of SQL meta-characters
  
 };
