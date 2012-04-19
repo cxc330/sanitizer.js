@@ -1,13 +1,16 @@
 {
 	"name"        : "Sanitizer.js",
 	"description" : "A sanitizer library similar to what PHP and Ruby on Rails has to offer.",
-	"version"     : "0.0.1",
+	"version"     : "0.1.0",
 	"author"      : {
 		"author1" : "Chien-Hung Chen <cxc330@case.edu>",
 		"author2" : "Chris Gross <cjg28@case.edu",
 		"author3" : "Alex Sevrain <acs@case.edu>",
 		"author4" : "Davis Wilkinson <dwilk@case.edu>"
 	},
+        "dependencies": {
+                "colors" : ">=0.3.0"
+        },
   	"homepage"    : "https://github.com/cxc330/sanitizer.js",
   	"main"        : "sanitizer.js",
   	"script"	  : {
