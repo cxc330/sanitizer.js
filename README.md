@@ -64,3 +64,14 @@ To run test.js, simply:
 
 
 ##Sanitizer.js Manual
+- sanitizer.stripHTML(string)
+	- This strips HTML tags out of the string.
+- sanitizer.verifyEmail(string)
+	- This is a utility function for developers to verify that the input is a valid email
+- sanitizer.encode(string)
+	- This encodes the special characters.
+	- By passing in a optional parameter, you can make this encode URLs such that the address is still intact.
+- sanitizer.decode(string)
+	- This decodes what you encoded with sanitizer.encode(). Works for URLs as well.
+- sanitizer.stripSQL(string)
+	- Currently, this is an aggressive function that will strip out key words of SQL. Further along, it will be smarter and escape characters and check key words correctly such that it will allow the words the pass through to the database after it has been sanitized.
