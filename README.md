@@ -42,6 +42,7 @@ Where the 3000 can be any open port you want.
 
 ####Seeing and using the To-Do List
 To use the To-Do List web application, go to http://yourserver.url:portnumber/todo/
+
 Please also create a file called
 
        login.js
