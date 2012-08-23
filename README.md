@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/cxc330/sanitizer.js.png)](http://travis-ci.org/cxc330/sanitizer.js)
 #Santizer.js
 
 - Description
